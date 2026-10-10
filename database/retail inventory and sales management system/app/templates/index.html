@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Inventory Management</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <h2>Retail<span>OS</span></h2>
+
+        <p class="menu-label">MAIN MENU</p>
+
+        <a href="/" class="active">Dashboard</a>
+        <a href="#products">Products</a>
+        <a href="#inventory">Inventory</a>
+
+        <div class="sidebar-footer">
+            Inventory Management System
+        </div>
+    </aside>
+
+    <main class="main">
+        <header>
+            <div>
+                <p class="eyebrow">OVERVIEW</p>
+                <h1>Dashboard</h1>
+                <p class="subtitle">
+                    Manage your products and monitor inventory.
+                </p>
+            </div>
+
+            <div class="status">
+                <span></span> System dashboard
+            </div>
+        </header>
+
+        <section class="stats">
+            <article class="stat-card">
+                <p>Total Products</p>
+                <h2 id="product-count">Loading...</h2>
+                <span>Registered products</span>
+            </article>
+        </section>
+
+        <section class="panel" id="products">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">DATABASE RECORDS</p>
+                    <h2>Products</h2>
+                </div>
+
+                <div class="product-actions">
+                    <input
+                        type="search"
+                        id="product-search"
+                        placeholder="Search products..."
+                    >
+
+                    <button onclick="openProductForm()">
+                        + Add Product
+                    </button>
+
+                    <button onclick="loadProducts()">
+                        Refresh ↻
+                    </button>
+                </div>
+            </div>
+
+            <div id="product-form-container" hidden>
+                <h3>Add a new product</h3>
+
+                <form id="product-form">
+                    <div class="form-grid">
+                        <label>
+                            Product Code
+                            <input name="product_code" required>
+                        </label>
+
+                        <label>
+                            Product Name
+                            <input name="product_name" required>
+                        </label>
+
+                        <label>
+                            Category
+                            <select
+                                name="category_id"
+                                id="category-select"
+                                required
+                            >
+                                <option value="">Select Category</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Brand
+                            <select
+                                name="brand_id"
+                                id="brand-select"
+                                required
+                            >
+                                <option value="">Select Brand</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Purchase Price
+                            <input
+                                name="purchase_price"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Selling Price
+                            <input
+                                name="selling_price"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Stock Quantity
+                            <input
+                                name="stock_quantity"
+                                type="number"
+                                min="0"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Reorder Level
+                            <input
+                                name="reorder_level"
+                                type="number"
+                                min="0"
+                                required
+                            >
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit">Save Product</button>
+
+                        <button
+                            type="button"
+                            class="cancel-button"
+                            onclick="closeProductForm()"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <p id="form-message" role="status"></p>
+            </div>
+
+            <p id="message">Loading products from your database...</p>
+
+            <div class="table-container">
+                <table>
+                    <thead id="table-head"></thead>
+                    <tbody id="product-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel" id="inventory">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">INVENTORY</p>
+                    <h2>Stock Management</h2>
+                </div>
+            </div>
+
+            <p>
+                Stock quantities and reorder levels are maintained
+                for each product.
+            </p>
+
+            <p>
+                Use the Products table to view and update product stock.
+            </p>
+        </section>
+
+        <footer>
+            Retail Inventory &amp; Sales Management System · DBMS Project
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
